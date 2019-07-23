@@ -56,7 +56,7 @@ public class IRSTables {
         return percent * salarioBruto;
     }
 
-    private int deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
+    public int deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
         int res = 0;
         switch (estado) {
             case Married2Disabled:
