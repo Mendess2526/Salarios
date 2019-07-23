@@ -12,13 +12,13 @@ public class IRSTables {
     private Hashtable<Integer, ArrayList<Integer>> unmarriedisabled;
     private Hashtable<Integer, ArrayList<Integer>> unmarried;
 
-    public IRSTables() throws Exception{
-       this.married2disabled = new Hashtable<>();
-       this.married2 = new Hashtable<>();
-       this.married1disabled = new Hashtable<>();
-       this.married1 = new Hashtable<>();
-       this.unmarriedisabled = new Hashtable<>();
-       this.unmarried = new Hashtable<>();
+    public IRSTables() throws Exception {
+        this.married2disabled = new Hashtable<>();
+        this.married2 = new Hashtable<>();
+        this.married1disabled = new Hashtable<>();
+        this.married1 = new Hashtable<>();
+        this.unmarriedisabled = new Hashtable<>();
+        this.unmarried = new Hashtable<>();
 
         readFile(married2disabled, "irs_retention_married_double_disabled");
         readFile(married2, "irs_retention_married_double");
@@ -28,8 +28,8 @@ public class IRSTables {
         readFile(unmarried, "irs_retention_unmarried");
     }
 
-    private void readFile (Hashtable<Integer, ArrayList<Integer>> table, String filename) throws Exception{
-        File file = new File("desktop/Salarios/irs_tables/filename.csv");
+    private void readFile(Hashtable<Integer, ArrayList<Integer>> table, String filename) throws Exception {
+        File file = new File(filename);
         Scanner sc = new Scanner(file);
 
         while (sc.hasNextLine()) {
@@ -38,7 +38,7 @@ public class IRSTables {
 
             ArrayList<Integer> values = Arrays.stream(parts).map(Integer::parseInt).collect(Collectors.toCollection(ArrayList::new));
 
-            table.put(Integer.parseInt(parts[0]),values);
+            table.put(Integer.parseInt(parts[0]), values);
         }
     }
 
@@ -51,33 +51,43 @@ public class IRSTables {
         Single
     }
 
-    private int deducaoAux (Hashtable<Integer, ArrayList<Integer>> table, int salarioBruto, int dependentes){
-        NavigableMap<Integer, ArrayList<Integer>> map = new TreeMap<>();
-        map.putAll(married2disabled);
-        int percent = map.floorEntry(salarioBruto).getValue().get(dependentes);
-        return percent*salarioBruto;
+    private int deducaoAux(TreeMap<Integer, ArrayList<Integer>> table, int salarioBruto, int dependentes) {
+        int percent = table.floorEntry(salarioBruto).getValue().get(dependentes);
+        return percent * salarioBruto;
     }
 
-    private int deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes){
-        int res=0;
-        switch (estado){
+    private int deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
+        int res = 0;
+        switch (estado) {
             case Married2Disabled:
-                res = deducaoAux(married2disabled, salarioBruto, dependentes);
+                TreeMap<Integer, ArrayList<Integer>> married2disableD = new TreeMap<>();
+                married2disableD.putAll(married2disabled);
+                res = deducaoAux(married2disableD, salarioBruto, dependentes);
                 break;
             case Married2:
-                res = deducaoAux(married2, salarioBruto, dependentes);
+                TreeMap<Integer, ArrayList<Integer>> marrieD2 = new TreeMap<>();
+                marrieD2.putAll(married2);
+                res = deducaoAux(marrieD2, salarioBruto, dependentes);
                 break;
             case Married1Disabled:
-                res = deducaoAux(married1disabled, salarioBruto, dependentes);
+                TreeMap<Integer, ArrayList<Integer>> married1DisableD = new TreeMap<>();
+                married1DisableD.putAll(married1disabled);
+                res = deducaoAux(married1DisableD, salarioBruto, dependentes);
                 break;
             case Married:
-                res = deducaoAux(married1, salarioBruto, dependentes);
+                TreeMap<Integer, ArrayList<Integer>> marrieD1 = new TreeMap<>();
+                marrieD1.putAll(married1);
+                res = deducaoAux(marrieD1, salarioBruto, dependentes);
                 break;
             case SingleDisabled:
-                res = deducaoAux(unmarriedisabled, salarioBruto, dependentes);
+                TreeMap<Integer, ArrayList<Integer>> singledisableD = new TreeMap<>();
+                singledisableD.putAll(unmarriedisabled);
+                res = deducaoAux(singledisableD, salarioBruto, dependentes);
                 break;
             case Single:
-                res = deducaoAux(unmarried, salarioBruto, dependentes);
+                TreeMap<Integer, ArrayList<Integer>> singlE = new TreeMap<>();
+                singlE.putAll(unmarried);
+                res = deducaoAux(singlE, salarioBruto, dependentes);
         }
         return res;
     }
