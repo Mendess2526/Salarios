@@ -5,30 +5,30 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class IRSTables {
-    private TreeMap<Integer, ArrayList<Integer>> married2disabled;
-    private TreeMap<Integer, ArrayList<Integer>> married2;
-    private TreeMap<Integer, ArrayList<Integer>> married1disabled;
-    private TreeMap<Integer, ArrayList<Integer>> married1;
-    private TreeMap<Integer, ArrayList<Integer>> unmarriedisabled;
     private TreeMap<Integer, ArrayList<Integer>> unmarried;
+    private TreeMap<Integer, ArrayList<Integer>> unmarriedDisabled;
+    private TreeMap<Integer, ArrayList<Integer>> married1;
+    private TreeMap<Integer, ArrayList<Integer>> married1Disabled;
+    private TreeMap<Integer, ArrayList<Integer>> married2;
+    private TreeMap<Integer, ArrayList<Integer>> married2Disabled;
 
     public IRSTables() throws Exception {
-        this.married2disabled = new TreeMap<>();
-        this.married2 = new TreeMap<>();
-        this.married1disabled = new TreeMap<>();
-        this.married1 = new TreeMap<>();
-        this.unmarriedisabled = new TreeMap<>();
         this.unmarried = new TreeMap<>();
+        this.unmarriedDisabled = new TreeMap<>();
+        this.married1 = new TreeMap<>();
+        this.married1Disabled = new TreeMap<>();
+        this.married2 = new TreeMap<>();
+        this.married2Disabled = new TreeMap<>();
 
-        readFile(married2disabled, "irs_retention_married_double_disabled");
-        readFile(married2, "irs_retention_married_double");
-        readFile(married1disabled, "irs_retention_married_only_disabled");
-        readFile(married1, "irs_retention_married_only");
-        readFile(unmarriedisabled, "irs_retention_unmarried_disabled");
         readFile(unmarried, "irs_retention_unmarried");
+        readFile(unmarriedDisabled, "irs_retention_unmarried_disabled");
+        readFile(married1, "irs_retention_married_only");
+        readFile(married1Disabled, "irs_retention_married_only_disabled");
+        readFile(married2, "irs_retention_married_double");
+        readFile(married2Disabled, "irs_retention_married_double_disabled");
     }
 
-    private void readFile(TreeMap<Integer, ArrayList<Integer>> table, String filename) throws Exception {
+    private static void readFile(TreeMap<Integer, ArrayList<Integer>> table, String filename) throws Exception {
         File file = new File(filename);
         Scanner sc = new Scanner(file);
 
@@ -43,12 +43,12 @@ public class IRSTables {
     }
 
     public enum IRSTableType {
-        Married2Disabled,
-        Married2,
-        Married1Disabled,
-        Married,
+        Single,
         SingleDisabled,
-        Single
+        Married1,
+        Married1Disabled,
+        Married2,
+        Married2Disabled,
     }
 
     private int deducaoAux(TreeMap<Integer, ArrayList<Integer>> table, int salarioBruto, int dependentes) {
@@ -59,23 +59,24 @@ public class IRSTables {
     public int deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
         int res = 0;
         switch (estado) {
-            case Married2Disabled:
-                res = deducaoAux(married2disabled, salarioBruto, dependentes);
+            case Single:
+                res = deducaoAux(unmarried, salarioBruto, dependentes);
+                break;
+            case SingleDisabled:
+                res = deducaoAux(unmarriedDisabled, salarioBruto, dependentes);
+                break;
+            case Married1:
+                res = deducaoAux(married1, salarioBruto, dependentes);
+                break;
+            case Married1Disabled:
+                res = deducaoAux(married1Disabled, salarioBruto, dependentes);
                 break;
             case Married2:
                 res = deducaoAux(married2, salarioBruto, dependentes);
                 break;
-            case Married1Disabled:
-                res = deducaoAux(married1disabled, salarioBruto, dependentes);
+            case Married2Disabled:
+                res = deducaoAux(married2Disabled, salarioBruto, dependentes);
                 break;
-            case Married:
-                res = deducaoAux(married1, salarioBruto, dependentes);
-                break;
-            case SingleDisabled:
-                res = deducaoAux(unmarriedisabled, salarioBruto, dependentes);
-                break;
-            case Single:
-                res = deducaoAux(unmarried, salarioBruto, dependentes);
         }
         return res;
     }
