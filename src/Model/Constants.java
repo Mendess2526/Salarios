@@ -7,7 +7,7 @@ public class Constants {
     public static final int SocialSecurityTaxEmployer = 2375;
     public static final int FCT = 100;
 
-    public static int maritalToPercentage(MaritalStatus m) {
+    public static int retentionTax(MaritalStatus m) {
         switch (m) {
             case Single: return 350;
             case Married1: return 120;
@@ -16,7 +16,7 @@ public class Constants {
         }
     }
 
-    public static int maritalToPercentage2(MaritalStatus m) {
+    public static int retentionTax2(MaritalStatus m) {
         switch (m) {
             case Single: return 2980;
             case Married1: return 2410;
