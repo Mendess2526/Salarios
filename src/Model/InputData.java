@@ -1,16 +1,16 @@
 package Model;
 
 public class InputData {
-    public float salarioBruto;
+    private int salarioBruto;
     private int numDependentes;
     private int diuturnidadesNisentos;
-    private float subAlimNisento;
+    private int subAlimNisento;
     private int numDias;
-    private float abonoFalhasIsento;
-    private float outrosIsentos;
+    private int abonoFalhasIsento;
+    private int outrosIsentos;
 
-    public InputData (float salarioBruto, int numDependentes, int diuturnidadesNisentos, float subAlimNisento,
-                      int numDias, float abonoFalhasIsento, float outrosIsentos){
+    public InputData (int salarioBruto, int numDependentes, int diuturnidadesNisentos, int subAlimNisento,
+                      int numDias, int abonoFalhasIsento, int outrosIsentos){
         this.salarioBruto = salarioBruto;
         this.numDependentes = numDependentes;
         this.diuturnidadesNisentos = diuturnidadesNisentos;
