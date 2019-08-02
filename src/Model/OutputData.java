@@ -9,15 +9,14 @@ public class OutputData {
     private int outrosIsentos;
     private int totalIliquido;
     private int segSocial;
+    private int retencaoIRS;
+    private int totalLiquido;
+    private int segSocialEEE;
     private int FCT;
-    private int totalMensalSegSocial;
-    private int totalMensalIRS;
-    private int totalMensalFCT_FGCT;
-    private int totalMensalSalario;
 
     public OutputData (int salarioBruto, int subAlimNisento, int diuturnidadesNisentos, int subAlimIsento,
-                      int abonoFalhasIsento, int outrosIsentos, int totalIliquido, int segSocial, int FCT,
-                      int totalMensalSegSocial, int totalMensalIRS, int totalMensalFCT_FGCT, int totalMensalSalario){
+                      int abonoFalhasIsento, int outrosIsentos, int totalIliquido, int segSocial, int retencaoIRS,
+                      int totalLiquido, int segSocialEEE, int FCT){
         this.salarioBruto = salarioBruto;
         this.subAlimNisento = subAlimNisento;
         this.diuturnidadesNisentos = diuturnidadesNisentos;
@@ -26,10 +25,9 @@ public class OutputData {
         this.outrosIsentos = outrosIsentos;
         this.totalIliquido = totalIliquido;
         this.segSocial = segSocial;
+        this.retencaoIRS = retencaoIRS;
+        this.totalLiquido = totalLiquido;
+        this.segSocialEEE = segSocialEEE;
         this.FCT = FCT;
-        this.totalMensalSegSocial = totalMensalSegSocial;
-        this.totalMensalIRS = totalMensalIRS;
-        this.totalMensalFCT_FGCT = totalMensalFCT_FGCT;
-        this.totalMensalSalario = totalMensalSalario;
     }
 }
