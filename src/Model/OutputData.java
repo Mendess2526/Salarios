@@ -1,10 +1,11 @@
 package Model;
 
 public class OutputData {
-    private  int salarioBruto;
-    private int subAlimNisento;
-    private int diuturnidadesNisentos;
-    private int subAlimIsento;
+    private int salarioBruto;
+    private int outrosNaoIsentos;
+    private int subAlimentacaoNaoIsento;
+    private int diuturnidadesNaoIsentos;
+    private int subAlimentacaoIsento;
     private int abonoFalhasIsento;
     private int outrosIsentos;
     private int totalIliquido;
@@ -14,13 +15,14 @@ public class OutputData {
     private int segSocialEEE;
     private int FCT;
 
-    public OutputData (int salarioBruto, int subAlimNisento, int diuturnidadesNisentos, int subAlimIsento,
+    public OutputData(int salarioBruto, int outrosNaoIsentos, int subAlimentacaoNaoIsento, int diuturnidadesNaoIsentos, int subAlimentacaoIsento,
                       int abonoFalhasIsento, int outrosIsentos, int totalIliquido, int segSocial, int retencaoIRS,
                       int totalLiquido, int segSocialEEE, int FCT){
         this.salarioBruto = salarioBruto;
-        this.subAlimNisento = subAlimNisento;
-        this.diuturnidadesNisentos = diuturnidadesNisentos;
-        this.subAlimIsento = subAlimIsento;
+        this.outrosNaoIsentos = outrosNaoIsentos;
+        this.subAlimentacaoNaoIsento = subAlimentacaoNaoIsento;
+        this.diuturnidadesNaoIsentos = diuturnidadesNaoIsentos;
+        this.subAlimentacaoIsento = subAlimentacaoIsento;
         this.abonoFalhasIsento = abonoFalhasIsento;
         this.outrosIsentos = outrosIsentos;
         this.totalIliquido = totalIliquido;
@@ -35,16 +37,16 @@ public class OutputData {
         return salarioBruto;
     }
 
-    public int getSubAlimNisento() {
-        return subAlimNisento;
+    public int getSubAlimentacaoNaoIsento() {
+        return subAlimentacaoNaoIsento;
     }
 
-    public int getDiuturnidadesNisentos() {
-        return diuturnidadesNisentos;
+    public int getDiuturnidadesNaoIsentos() {
+        return diuturnidadesNaoIsentos;
     }
 
-    public int getSubAlimIsento() {
-        return subAlimIsento;
+    public int getSubAlimentacaoIsento() {
+        return subAlimentacaoIsento;
     }
 
     public int getAbonoFalhasIsento() {
@@ -77,5 +79,28 @@ public class OutputData {
 
     public int getFCT() {
         return FCT;
+    }
+
+    public int getOutrosNaoIsentos() {
+        return outrosNaoIsentos;
+    }
+
+    @Override
+    public String toString() {
+        return "OutputData{" +
+                "salarioBruto=" + salarioBruto +
+                ", outrosNaoIsentos=" + outrosNaoIsentos +
+                ", subAlimentacaoNaoIsento=" + subAlimentacaoNaoIsento +
+                ", diuturnidadesNaoIsentos=" + diuturnidadesNaoIsentos +
+                ", subAlimentacaoIsento=" + subAlimentacaoIsento +
+                ", abonoFalhasIsento=" + abonoFalhasIsento +
+                ", outrosIsentos=" + outrosIsentos +
+                ", totalIliquido=" + totalIliquido +
+                ", segSocial=" + segSocial +
+                ", retencaoIRS=" + retencaoIRS +
+                ", totalLiquido=" + totalLiquido +
+                ", segSocialEEE=" + segSocialEEE +
+                ", FCT=" + FCT +
+                '}';
     }
 }

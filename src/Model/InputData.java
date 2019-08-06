@@ -3,54 +3,120 @@ package Model;
 public class InputData {
     private int salarioBruto;
     private int numDependentes;
-    private int diuturnidadesNisentos;
-    private int subAlimNisento;
-    private int subAlimIsentoValor;
+    private IRSTables.IRSTableType maritalStatus;
     private int numDias;
-    private int abonoFalhasIsento;
     private int outrosIsentos;
+    private int abonoParaFalhas;
+    private int diuturnidadesNaoIsentos;
+    private boolean emNumerario;
+    private int subAlimentacaoBase;
+    private int outrosNaoIsento;
+    private Constants.EncargosEEmpregadoraSS encargosEEmpregadoraSS;
 
-    public InputData (int salarioBruto, int numDependentes, int diuturnidadesNisentos, int subAlimNisento,
-                      int subAlimIsentoValor, int numDias, int abonoFalhasIsento, int outrosIsentos){
+    public InputData(
+            int salarioBruto,
+            int numDependentes,
+            int numDias,
+            int outrosIsentos,
+            IRSTables.IRSTableType maritalStatus,
+            int abonoParaFalhas,
+            int diuturnidadesNaoIsentos,
+            boolean emNumerario,
+            int subAlimentacaoBase,
+            int outrosNaoIsentos,
+            Constants.EncargosEEmpregadoraSS encargosEEmpregadoraSS) {
         this.salarioBruto = salarioBruto;
         this.numDependentes = numDependentes;
-        this.diuturnidadesNisentos = diuturnidadesNisentos;
-        this.subAlimNisento = subAlimNisento;
-        this.subAlimIsentoValor = subAlimIsentoValor;
         this.numDias = numDias;
-        this.abonoFalhasIsento = abonoFalhasIsento;
         this.outrosIsentos = outrosIsentos;
+        this.maritalStatus = maritalStatus;
+        this.abonoParaFalhas = abonoParaFalhas;
+        this.diuturnidadesNaoIsentos = diuturnidadesNaoIsentos;
+        this.emNumerario = emNumerario;
+        this.subAlimentacaoBase = subAlimentacaoBase;
+        this.outrosNaoIsento = outrosNaoIsentos;
+        this.encargosEEmpregadoraSS = encargosEEmpregadoraSS;
     }
 
-    public int getSalarioBruto() {
-        return salarioBruto;
+    private int subAlimentacaoNaoIsento() {
+        int isencao = Constants.isencaoMetodoRenumeracao(this.emNumerario);
+        if (this.subAlimentacaoBase > isencao) {
+            return (this.subAlimentacaoBase - isencao) * this.numDias;
+        } else {
+            return 0;
+        }
     }
 
-    public int getNumDependentes() {
-        return numDependentes;
+    private int subAlimentacaoIsento() {
+        int isencao = Constants.isencaoMetodoRenumeracao(this.emNumerario);
+        if (this.subAlimentacaoBase <= isencao) {
+            return this.numDias * this.subAlimentacaoBase;
+        } else {
+            return isencao * this.numDias;
+        }
     }
 
-    public int getDiuturnidadesNisentos() {
-        return diuturnidadesNisentos;
+    private int abonoFalhasIsento() {
+        return Math.min(this.abonoParaFalhas, (int) (0.05 * this.salarioBruto));
     }
 
-    public int getSubAlimNisento() {
-        return subAlimNisento;
+    private int totalNaoIsento(int subAlimentacaoNaoIsento) {
+        return this.salarioBruto + this.outrosNaoIsento + subAlimentacaoNaoIsento + this.diuturnidadesNaoIsentos;
     }
 
-    public int getSubAlimIsentoValor() {
-        return subAlimIsentoValor;
+    private int totalIliquido(int totalNaoIsento, int subAlimentacaoIsento, int abonoParaFalhasIsento) {
+        return totalNaoIsento
+                + subAlimentacaoIsento
+                + abonoParaFalhasIsento
+                + this.outrosIsentos;
     }
 
-    public int getNumDias() {
-        return numDias;
+    private int segSocial(int totalNaoIsento) {
+        return (int) Math.round(totalNaoIsento * Constants.SocialSecurityTaxWorker);
     }
 
-    public int getAbonoFalhasIsento() {
-        return abonoFalhasIsento;
+    private int retencaoIRS(int totalNaoIsento) {
+        return (int) Math.round(IRSTables.getInstance()
+                                         .deducaoSalario(this.maritalStatus, totalNaoIsento, this.numDependentes));
     }
 
-    public int getOutrosIsentos() {
-        return outrosIsentos;
+    private int totalLiquido(int totalIliquido, int segSocial, int retencaoIRS) {
+        return totalIliquido - segSocial - retencaoIRS;
+    }
+
+    private int segSocialEE(int totalNaoIsento) {
+        return (int) Math.round((totalNaoIsento * this.encargosEEmpregadoraSS.getTaxa()));
+    }
+
+    private int FCT() {
+        return (int) Math.round((this.salarioBruto + this.diuturnidadesNaoIsentos) * Constants.FCT);
+    }
+
+    public OutputData solve() {
+        // Nao isento
+        int subAlimentacaoNaoIsento = subAlimentacaoNaoIsento();
+        int totalNaoIsento = totalNaoIsento(subAlimentacaoNaoIsento);
+        // Isento
+        int subAlimentacaoIsento = subAlimentacaoIsento();
+        int abonoFalhasIsento = abonoFalhasIsento();
+
+        int totalIliquido = totalIliquido(totalNaoIsento, subAlimentacaoIsento, abonoFalhasIsento);
+        int segSocial = segSocial(totalNaoIsento);
+        int retencaoIRS = retencaoIRS(totalNaoIsento);
+
+        return new OutputData(
+                this.salarioBruto,
+                this.outrosNaoIsento,
+                subAlimentacaoNaoIsento(),
+                this.diuturnidadesNaoIsentos,
+                subAlimentacaoIsento(),
+                abonoFalhasIsento(),
+                this.outrosIsentos,
+                totalIliquido,
+                segSocial,
+                retencaoIRS,
+                totalLiquido(totalIliquido, segSocial, retencaoIRS),
+                segSocialEE(totalNaoIsento),
+                FCT());
     }
 }

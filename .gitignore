@@ -31,3 +31,4 @@ nbproject/
 build/
 build.xml
 .~lock*
+out/
