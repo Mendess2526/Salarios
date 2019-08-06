@@ -30,4 +30,52 @@ public class OutputData {
         this.segSocialEEE = segSocialEEE;
         this.FCT = FCT;
     }
+
+    public int getSalarioBruto() {
+        return salarioBruto;
+    }
+
+    public int getSubAlimNisento() {
+        return subAlimNisento;
+    }
+
+    public int getDiuturnidadesNisentos() {
+        return diuturnidadesNisentos;
+    }
+
+    public int getSubAlimIsento() {
+        return subAlimIsento;
+    }
+
+    public int getAbonoFalhasIsento() {
+        return abonoFalhasIsento;
+    }
+
+    public int getOutrosIsentos() {
+        return outrosIsentos;
+    }
+
+    public int getTotalIliquido() {
+        return totalIliquido;
+    }
+
+    public int getSegSocial() {
+        return segSocial;
+    }
+
+    public int getRetencaoIRS() {
+        return retencaoIRS;
+    }
+
+    public int getTotalLiquido() {
+        return totalLiquido;
+    }
+
+    public int getSegSocialEEE() {
+        return segSocialEEE;
+    }
+
+    public int getFCT() {
+        return FCT;
+    }
 }

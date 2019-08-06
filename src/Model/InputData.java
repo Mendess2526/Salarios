@@ -21,4 +21,36 @@ public class InputData {
         this.abonoFalhasIsento = abonoFalhasIsento;
         this.outrosIsentos = outrosIsentos;
     }
+
+    public int getSalarioBruto() {
+        return salarioBruto;
+    }
+
+    public int getNumDependentes() {
+        return numDependentes;
+    }
+
+    public int getDiuturnidadesNisentos() {
+        return diuturnidadesNisentos;
+    }
+
+    public int getSubAlimNisento() {
+        return subAlimNisento;
+    }
+
+    public int getSubAlimIsentoValor() {
+        return subAlimIsentoValor;
+    }
+
+    public int getNumDias() {
+        return numDias;
+    }
+
+    public int getAbonoFalhasIsento() {
+        return abonoFalhasIsento;
+    }
+
+    public int getOutrosIsentos() {
+        return outrosIsentos;
+    }
 }
