@@ -7,19 +7,21 @@ public class InputData {
     private int subAlimNisento;
     private int subAlimIsentoValor;
     private int numDias;
-    private int abonoFalhasIsento;
+    private int abonoFalhasIsentoValor;
     private int outrosIsentos;
+    private MaritalStatus maritalStatus;
 
     public InputData (int salarioBruto, int numDependentes, int diuturnidadesNisentos, int subAlimNisento,
-                      int subAlimIsentoValor, int numDias, int abonoFalhasIsento, int outrosIsentos){
+                      int subAlimIsentoValor, int numDias, int abonoFalhasIsentoValor, int outrosIsentos, MaritalStatus maritalStatus){
         this.salarioBruto = salarioBruto;
         this.numDependentes = numDependentes;
         this.diuturnidadesNisentos = diuturnidadesNisentos;
         this.subAlimNisento = subAlimNisento;
         this.subAlimIsentoValor = subAlimIsentoValor;
         this.numDias = numDias;
-        this.abonoFalhasIsento = abonoFalhasIsento;
+        this.abonoFalhasIsentoValor = abonoFalhasIsentoValor;
         this.outrosIsentos = outrosIsentos;
+        this.maritalStatus = maritalStatus;
     }
 
     public int getSalarioBruto() {
@@ -46,11 +48,15 @@ public class InputData {
         return numDias;
     }
 
-    public int getAbonoFalhasIsento() {
-        return abonoFalhasIsento;
+    public int getAbonoFalhasIsentoValor() {
+        return abonoFalhasIsentoValor;
     }
 
     public int getOutrosIsentos() {
         return outrosIsentos;
+    }
+
+    public MaritalStatus getMaritalStatus() {
+        return maritalStatus;
     }
 }
