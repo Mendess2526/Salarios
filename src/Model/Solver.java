@@ -1,6 +1,21 @@
 package Model;
 
 public class Solver {
+    private static double subAlimNisento(int subAlimIsentoValor){ //FIXME
+        if(subAlimIsentoValor>4.77) return subAlimIsentoValor-4.77;
+        else return 0;
+    }
+
+    private static double subAlimIsento(int subAlimIsentoValor, int numDias){ //FIXME
+        if(subAlimIsentoValor<=4.77) return numDias*subAlimIsentoValor;
+        else return 4.77*numDias;
+    }
+
+    private static double abonoFalhasIsento(int abonoFalhasIsentoValor, int constante){ //FIXME
+        if(abonoFalhasIsentoValor<constante) return abonoFalhasIsentoValor;
+        else return constante;
+    }
+
     private static int totalIliquido(int salarioBruto, int subAlimNisento, int diuturnidadesNisentos,
                                      int subAlimentoIsentoValor, int abonoFalhasIsento, int outrosIsentos) {
         return salarioBruto + subAlimNisento + diuturnidadesNisentos + subAlimentoIsentoValor + abonoFalhasIsento +
@@ -8,47 +23,33 @@ public class Solver {
     }
 
     private static int segSocial(int salariobruto, int subAlimNisento, int diuturnidadesNisentos) {
-        return (int) Math.round((salariobruto + subAlimNisento + diuturnidadesNisentos) * 0.11);
+        return (int) Math.round((salariobruto + subAlimNisento + diuturnidadesNisentos) * Constants.SocialSecurityTaxWorker);
     }
 
-    private static int retencaoIRS(int salarioBruto, int subAlimNisento, int diuturnidadesNisentos) {
-        return (int) Math.round((salarioBruto + subAlimNisento + diuturnidadesNisentos) * 0.64);
+    private static int retencaoIRS(int salarioBruto, int subAlimNisento, int diuturnidadesNisentos, MaritalStatus maritalStatus) {
+        return (int) Math.round((salarioBruto + subAlimNisento + diuturnidadesNisentos) * Constants.retentionTax(maritalStatus));
     }
 
     private static int totalLiquido(int totalIliquido, int segSocial, int retencaoIRS) {
         return totalIliquido - segSocial - retencaoIRS;
     }
 
-    private static int segSocialEEE(int salariobruto, int subAlimNisento, int diuturnidadesNisentos) {
-        return (int) Math.round((salariobruto + subAlimNisento + diuturnidadesNisentos) * 0.2375);
+    private static int segSocialEEE(int salariobruto, int subAlimNisento, int diuturnidadesNisentos, MaritalStatus maritalStatus) {
+        return (int) Math.round((salariobruto + subAlimNisento + diuturnidadesNisentos) * Constants.SocialSecurityTaxEmployer);
     }
 
     private static int FCT(int salarioBruto, int diuturnidadesNisentos) {
-        return (int) Math.round((salarioBruto + diuturnidadesNisentos) * 0.1);
+        return (int) Math.round((salarioBruto + diuturnidadesNisentos) * Constants.FCT);
     }
-
-    private int salarioBruto;
-    private int subAlimNisento;
-    private int diuturnidadesNisentos;
-    private int subAlimIsento;
-    private int abonoFalhasIsento;
-    private int outrosIsentos;
-    private int totalIliquido;
-    private int segSocial;
-    private int retencaoIRS;
-    private int totalLiquido;
-    private int segSocialEEE;
-    private int FCT;
-
 
     public OutputData solve(InputData in) {
         int salarioBruto = in.getSalarioBruto();
-        int subAlimNisento = in.getSubAlimNisento();
         int diuturnidadesNisentos = in.getDiuturnidadesNisentos();
-        int subAlimIsento = in.getSubAlimIsentoValor();
-        int abonoFalhasIsento = in.getAbonoFalhasIsento();
         int outrosIsentos = in.getOutrosIsentos();
 
+        int subAlimNisento = subAlimNisento(in.getSubAlimIsentoValor());
+        int subAlimIsento = subAlimIsento(in.getSubAlimIsentoValor(), in.getNumDias());
+        int abonoFalhasIsento = abonoFalhasIsento(in.getAbonoFalhasIsentoValor(), constante); //FIXME
         int totalIliquido = totalIliquido(salarioBruto, subAlimNisento, diuturnidadesNisentos, subAlimIsento, abonoFalhasIsento, outrosIsentos);
         int segSocial = segSocial(salarioBruto, subAlimNisento, diuturnidadesNisentos);
         int retencaoIRS = retencaoIRS(salarioBruto, subAlimNisento, diuturnidadesNisentos);
