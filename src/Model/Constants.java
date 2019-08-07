@@ -3,25 +3,28 @@ package Model;
 import java.security.InvalidParameterException;
 
 public class Constants {
-    public static final int SocialSecurityTaxWorker = 1100;
-    public static final int SocialSecurityTaxEmployer = 2375;
-    public static final int FCT = 100;
+    public static final double SocialSecurityTaxWorker = 0.11;
+    public static final double FCT = 0.01;
 
-    public static int retentionTax(MaritalStatus m) {
-        switch (m) {
-            case Single: return 350;
-            case Married1: return 120;
-            case Married2: return 640;
-            default: throw new InvalidParameterException();
+    public static int isencaoMetodoRenumeracao(boolean emCartao) {
+        if(emCartao) {
+            return 477;
+        } else {
+            return 763;
         }
     }
 
-    public static int retentionTax2(MaritalStatus m) {
-        switch (m) {
-            case Single: return 2980;
-            case Married1: return 2410;
-            case Married2: return 3140;
-            default: throw new InvalidParameterException();
+    public enum EncargosEEmpregadoraSS {
+        RegineGeral(.2375),
+        PrimeiroEmprego(.2375 / 2),
+        ;
+
+        private final double taxa;
+
+        public double getTaxa() { return this.taxa; }
+
+        EncargosEEmpregadoraSS(double taxa) {
+            this.taxa = taxa;
         }
     }
 }

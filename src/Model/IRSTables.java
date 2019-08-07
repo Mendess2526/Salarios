@@ -5,14 +5,28 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class IRSTables {
-    private TreeMap<Integer, ArrayList<Integer>> unmarried;
-    private TreeMap<Integer, ArrayList<Integer>> unmarriedDisabled;
-    private TreeMap<Integer, ArrayList<Integer>> married1;
-    private TreeMap<Integer, ArrayList<Integer>> married1Disabled;
-    private TreeMap<Integer, ArrayList<Integer>> married2;
-    private TreeMap<Integer, ArrayList<Integer>> married2Disabled;
+    private static IRSTables instance = null;
 
-    public IRSTables() throws Exception {
+    public static IRSTables getInstance() {
+        if (instance == null) {
+            try {
+                instance = new IRSTables();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new NullPointerException(e.getMessage());
+            }
+        }
+        return instance;
+    }
+
+    private TreeMap<Integer, ArrayList<Double>> unmarried;
+    private TreeMap<Integer, ArrayList<Double>> unmarriedDisabled;
+    private TreeMap<Integer, ArrayList<Double>> married1;
+    private TreeMap<Integer, ArrayList<Double>> married1Disabled;
+    private TreeMap<Integer, ArrayList<Double>> married2;
+    private TreeMap<Integer, ArrayList<Double>> married2Disabled;
+
+    private IRSTables() throws Exception {
         this.unmarried = new TreeMap<>();
         this.unmarriedDisabled = new TreeMap<>();
         this.married1 = new TreeMap<>();
@@ -20,15 +34,15 @@ public class IRSTables {
         this.married2 = new TreeMap<>();
         this.married2Disabled = new TreeMap<>();
 
-        readFile(unmarried, "irs_retention_unmarried");
-        readFile(unmarriedDisabled, "irs_retention_unmarried_disabled");
-        readFile(married1, "irs_retention_married_only");
-        readFile(married1Disabled, "irs_retention_married_only_disabled");
-        readFile(married2, "irs_retention_married_double");
-        readFile(married2Disabled, "irs_retention_married_double_disabled");
+        readFile(unmarried, "irs_tables/irs_retention_unmarried.csv");
+        readFile(unmarriedDisabled, "irs_tables/irs_retention_unmarried_disabled.csv");
+        readFile(married1, "irs_tables/irs_retention_married_only.csv");
+        readFile(married1Disabled, "irs_tables/irs_retention_married_only_disabled.csv");
+        readFile(married2, "irs_tables/irs_retention_married_double.csv");
+        readFile(married2Disabled, "irs_tables/irs_retention_married_double_disabled.csv");
     }
 
-    private static void readFile(TreeMap<Integer, ArrayList<Integer>> table, String filename) throws Exception {
+    private static void readFile(TreeMap<Integer, ArrayList<Double>> table, String filename) throws Exception {
         File file = new File(filename);
         Scanner sc = new Scanner(file);
 
@@ -36,9 +50,14 @@ public class IRSTables {
             String line = sc.nextLine();
             String[] parts = line.split(",");
 
-            ArrayList<Integer> values = Arrays.stream(parts).map(Integer::parseInt).collect(Collectors.toCollection(ArrayList::new));
+            ArrayList<Double> values = Arrays.stream(parts)
+                                             .skip(1)
+                                             .map(s -> s.replaceFirst("%$", ""))
+                                             .map(Double::parseDouble)
+                                             .map(x -> x / 100)// TODO: FIX THIS
+                                             .collect(Collectors.toCollection(ArrayList::new));
 
-            table.put(Integer.parseInt(parts[0]), values);
+            table.put(Integer.parseInt(parts[0].replaceFirst("\\.","")), values);
         }
     }
 
@@ -51,33 +70,27 @@ public class IRSTables {
         Married2Disabled,
     }
 
-    private int deducaoAux(TreeMap<Integer, ArrayList<Integer>> table, int salarioBruto, int dependentes) {
-        int percent = table.floorEntry(salarioBruto).getValue().get(dependentes);
+    private double deducaoAux(TreeMap<Integer, ArrayList<Double>> table, int salarioBruto, int dependentes) {
+        double percent = table.ceilingEntry(salarioBruto).getValue().get(dependentes);
         return percent * salarioBruto;
     }
 
-    public int deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
-        int res = 0;
+    public double deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
         switch (estado) {
             case Single:
-                res = deducaoAux(unmarried, salarioBruto, dependentes);
-                break;
+                return deducaoAux(unmarried, salarioBruto, dependentes);
             case SingleDisabled:
-                res = deducaoAux(unmarriedDisabled, salarioBruto, dependentes);
-                break;
+                return deducaoAux(unmarriedDisabled, salarioBruto, dependentes);
             case Married1:
-                res = deducaoAux(married1, salarioBruto, dependentes);
-                break;
+                return deducaoAux(married1, salarioBruto, dependentes);
             case Married1Disabled:
-                res = deducaoAux(married1Disabled, salarioBruto, dependentes);
-                break;
+                return deducaoAux(married1Disabled, salarioBruto, dependentes);
             case Married2:
-                res = deducaoAux(married2, salarioBruto, dependentes);
-                break;
+                return deducaoAux(married2, salarioBruto, dependentes);
             case Married2Disabled:
-                res = deducaoAux(married2Disabled, salarioBruto, dependentes);
-                break;
+                return deducaoAux(married2Disabled, salarioBruto, dependentes);
+            default:
+                throw new IllegalArgumentException();
         }
-        return res;
     }
 }
