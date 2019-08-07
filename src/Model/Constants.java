@@ -1,7 +1,5 @@
 package Model;
 
-import java.security.InvalidParameterException;
-
 public class Constants {
     public static final double SocialSecurityTaxWorker = 0.11;
     public static final double FCT = 0.01;

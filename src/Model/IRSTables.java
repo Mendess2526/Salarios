@@ -68,6 +68,27 @@ public class IRSTables {
         Married1Disabled,
         Married2,
         Married2Disabled,
+        ;
+
+        @Override
+        public String toString() {
+            switch (this){
+                case Single:
+                    return "Single";
+                case SingleDisabled:
+                    return "SingleDisabled";
+                case Married1:
+                    return "Married1";
+                case Married1Disabled:
+                    return "Married1Disabled";
+                case Married2:
+                    return "Married2";
+                case Married2Disabled:
+                    return "Married2Disabled";
+                default:
+                    return "Oopsie Daisy!";
+            }
+        }
     }
 
     private double deducaoAux(TreeMap<Integer, ArrayList<Double>> table, int salarioBruto, int dependentes) {

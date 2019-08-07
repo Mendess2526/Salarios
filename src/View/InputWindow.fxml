@@ -10,7 +10,7 @@
    <children>
       <Label layoutX="253.0" layoutY="93.0" text="Tabela IRS:" />
       <TextField fx:id="subsidioAlim" layoutX="254.0" layoutY="223.0" prefHeight="27.0" prefWidth="176.0" />
-      <TextField layoutX="18.0" layoutY="71.0" prefHeight="27.0" prefWidth="176.0" />
+      <TextField fx:id="salarioBruto" layoutX="18.0" layoutY="71.0" prefHeight="27.0" prefWidth="176.0" />
       <TextField fx:id="numDependentes" layoutX="18.0" layoutY="124.0" prefHeight="27.0" prefWidth="176.0" />
       <TextField fx:id="numDias" layoutX="18.0" layoutY="180.0" prefHeight="27.0" prefWidth="176.0" />
       <TextField fx:id="outrosIsentos" layoutX="18.0" layoutY="230.0" prefHeight="27.0" prefWidth="176.0" />
@@ -19,7 +19,6 @@
       <ChoiceBox fx:id="encargosEE" layoutX="253.0" layoutY="170.0" prefHeight="27.0" prefWidth="176.0" />
       <ChoiceBox fx:id="tabelaIRS" layoutX="253.0" layoutY="115.0" prefHeight="27.0" prefWidth="176.0" />
       <CheckBox fx:id="emNumerario" layoutX="253.0" layoutY="66.0" mnemonicParsing="false" text="Sim" />
-      <CheckBox fx:id="naoNumerario" layoutX="322.0" layoutY="66.0" mnemonicParsing="false" text="Não" />
       <Label layoutX="253.0" layoutY="150.0" text="Encargo E. Empregadora:" />
       <Label layoutX="253.0" layoutY="45.0" text="Em numerário?" />
       <Label layoutX="18.0" layoutY="53.0" text="Salário Bruto:" />
