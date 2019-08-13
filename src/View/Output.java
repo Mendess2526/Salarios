@@ -2,7 +2,6 @@ package View;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -23,8 +22,6 @@ public class Output implements Initializable {
     @FXML private Label outrosNaoIsentosL;
     @FXML private Label segSocialEEEL;
     @FXML private Label totalLiquidoL;
-    @FXML private Button back;
-    @FXML private Button exit;
 
 
     @Override
@@ -45,10 +42,10 @@ public class Output implements Initializable {
     }
 
     public void goback() throws IOException {
-        Redirect.redirectTo(back, "View/InputWindow.fxml");
+        Salarios.redirectTo("View/InputWindow.fxml");
     }
 
     public void exitAll(){
-        
+        System.exit(0);
     }
 }
