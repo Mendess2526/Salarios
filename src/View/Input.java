@@ -1,47 +1,63 @@
 package View;
 
+import Model.Constants;
 import Model.IRSTables;
+import Model.InputData;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
+import java.net.URL;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.ResourceBundle;
 
-public class Input {
+public class Input implements Initializable {
     @FXML private TextField salarioBruto;
     @FXML private TextField numDependentes;
     @FXML private TextField numDias;
     @FXML private TextField outrosIsentos;
     @FXML private TextField abonoFalhas;
-    @FXML private TextField diuturnidadesNisentas;
+    @FXML private TextField diuturnidadesNaoIsentas;
     @FXML private CheckBox emNumerario;
-    @FXML private ChoiceBox tabelaIRS;
-    @FXML private ChoiceBox encargosEE;
+    @FXML private ChoiceBox<IRSTables.IRSTableType> tabelaIRS;
+    @FXML private ChoiceBox<Constants.EncargosEEmpregadoraSS> encargosEE;
     @FXML private TextField subsidioAlim;
-    @FXML private TextField outrosNisentos;
+    @FXML private TextField outrosNaoIsentos;
 
-    public Input(){
-        List<String> coiso = Arrays.stream(IRSTables.IRSTableType.values()).map(IRSTables.IRSTableType::toString).collect(Collectors.toList());
-        ObservableList<String> coiso2 = FXCollections.observableList(coiso);
-        tabelaIRS.setItems(coiso2);
-    }
     public void calculate(){
-        int salariobruto = Integer.parseInt(salarioBruto.getText());
-        int numdependentes = Integer.parseInt(numDependentes.getText());
-        int numdias = Integer.parseInt(numDias.getText());
-        int outrosisentos = Integer.parseInt(outrosIsentos.getText());
-        int abonofalhas = Integer.parseInt(abonoFalhas.getText());
-        int diuturnidadesnisentas = Integer.parseInt(diuturnidadesNisentas.getText());
-        boolean emnumerario = emNumerario.isSelected();
+        int salarioBruto = Integer.parseInt(this.salarioBruto.getText());
+        int numDependentes = Integer.parseInt(this.numDependentes.getText());
+        int numDias = Integer.parseInt(this.numDias.getText());
+        int outrosIsentos = Integer.parseInt(this.outrosIsentos.getText());
+        int abonoFalhas = Integer.parseInt(this.abonoFalhas.getText());
+        int diuturnidadesNaoIsentas = Integer.parseInt(this.diuturnidadesNaoIsentas.getText());
+        boolean emNumerario = this.emNumerario.isSelected();
 
-        int subsidioalim = Integer.parseInt(subsidioAlim.getText());
-        int outrosnisentos = Integer.parseInt(outrosNisentos.getText());
+        int subsidioAlim = Integer.parseInt(this.subsidioAlim.getText());
+        int outrosNaoIsentos = Integer.parseInt(this.outrosNaoIsentos.getText());
+        IRSTables.IRSTableType irsTableType = tabelaIRS.getValue();
+        Constants.EncargosEEmpregadoraSS encargosEEmpregadoraSS = encargosEE.getValue();
+        InputData id = new InputData(
+                salarioBruto,
+                numDependentes,
+                numDias,
+                outrosIsentos,
+                irsTableType,
+                abonoFalhas,
+                diuturnidadesNaoIsentas,
+                emNumerario,
+                subsidioAlim,
+                outrosNaoIsentos,
+                encargosEEmpregadoraSS);
+        System.out.println(id);
+    }
 
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        tabelaIRS.setItems(FXCollections.observableList(Arrays.asList(IRSTables.IRSTableType.values())));
+        encargosEE.setItems(FXCollections.observableList(Arrays.asList(Constants.EncargosEEmpregadoraSS.values())));
     }
 }
