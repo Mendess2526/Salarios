@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Output">
+   <children>
+      <Label layoutX="63.0" layoutY="20.0" text="Salário Bruto:" />
+      <Label fx:id="salarioBrutoL" layoutX="477.0" layoutY="20.0" text="Label" />
+      <Label fx:id="fctL" layoutX="477.0" layoutY="293.0" text="Label" />
+      <Label fx:id="outrosIsentosL" layoutX="477.0" layoutY="155.0" text="Label" />
+      <Label layoutX="63.0" layoutY="155.0" text="Outros Isentos:" />
+      <Label fx:id="abonoFalhasIsentoL" layoutX="477.0" layoutY="127.0" text="Label" />
+      <Label layoutX="63.0" layoutY="127.0" text="Abono p/Falhas Isento:" />
+      <Label fx:id="subsidioAlimIsentoL" layoutX="477.0" layoutY="100.0" text="Label" />
+      <Label layoutX="63.0" layoutY="100.0" text="Subsídio de Alimentação Isento:" />
+      <Label fx:id="diuturnidadesNaoIsentasL" layoutX="477.0" layoutY="72.0" text="Label" />
+      <Label layoutX="63.0" layoutY="72.0" text="Diuturnidades não Isentas:" />
+      <Label fx:id="subAlimNaoIsentoL" layoutX="477.0" layoutY="39.0" text="Label" />
+      <Label layoutX="63.0" layoutY="39.0" text="Subsídio de Alimentação não Isento:" />
+      <Label fx:id="retencaoIRSL" layoutX="477.0" layoutY="228.0" text="Label" />
+      <Label layoutX="63.0" layoutY="228.0" text="Rentenção IRS:" />
+      <Label fx:id="segSocialL" layoutX="477.0" layoutY="204.0" text="Label" />
+      <Label layoutX="63.0" layoutY="204.0" text="Segurança Social:" />
+      <Label fx:id="totalIliquidoL" layoutX="477.0" layoutY="181.0" text="Label" />
+      <Label layoutX="63.0" layoutY="181.0" text="Total Ilíquido:" />
+      <Label layoutX="61.0" layoutY="311.0" text="Outros não Isentos:" />
+      <Label fx:id="outrosNaoIsentosL" layoutX="477.0" layoutY="311.0" text="Label" />
+      <Label layoutX="63.0" layoutY="293.0" text="FCT:" />
+      <Label fx:id="segSocialEEEL" layoutX="477.0" layoutY="274.0" text="Label" />
+      <Label layoutX="63.0" layoutY="274.0" text="Segurança Social EEE:" />
+      <Label fx:id="totalLiquidoL" layoutX="477.0" layoutY="252.0" text="Label" />
+      <Label layoutX="63.0" layoutY="252.0" text="Total Líquido:" />
+      <Button fx:id="back" layoutX="61.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#goback" text="Back" />
+      <Button fx:id="exit" layoutX="470.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#exitAll" text="Exit" />
+   </children>
+</AnchorPane>

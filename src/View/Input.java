@@ -3,18 +3,26 @@ package View;
 import Model.Constants;
 import Model.IRSTables;
 import Model.InputData;
+import Model.OutputData;
+import com.sun.org.apache.xml.internal.serializer.OutputPropertiesFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Input implements Initializable {
+    public static OutputData output;
+
     @FXML private TextField salarioBruto;
     @FXML private TextField numDependentes;
     @FXML private TextField numDias;
@@ -26,8 +34,9 @@ public class Input implements Initializable {
     @FXML private ChoiceBox<Constants.EncargosEEmpregadoraSS> encargosEE;
     @FXML private TextField subsidioAlim;
     @FXML private TextField outrosNaoIsentos;
+    @FXML private Button calcular;
 
-    public void calculate(){
+    public void calculate() throws IOException {
         int salarioBruto = Integer.parseInt(this.salarioBruto.getText());
         int numDependentes = Integer.parseInt(this.numDependentes.getText());
         int numDias = Integer.parseInt(this.numDias.getText());
@@ -53,6 +62,8 @@ public class Input implements Initializable {
                 outrosNaoIsentos,
                 encargosEEmpregadoraSS);
         System.out.println(id);
+        output = id.solve();
+        Redirect.redirectTo(calcular, "View/OutputWindow.fxml");
     }
 
     @Override
