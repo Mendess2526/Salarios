@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,23 +25,23 @@ public class Output implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.salarioBrutoL.setText(Input.output.getSalarioBruto() + "");
+        this.salarioBrutoL.setText(Input.output.getSalarioBruto() / 100.0 + "");
         this.fctL.setText(Input.output.getFCT() + "");
-        this.outrosIsentosL.setText(Input.output.getOutrosIsentos() + "");
-        this.abonoFalhasIsentoL.setText(Input.output.getAbonoFalhasIsento() + "");
-        this.subsidioAlimIsentoL.setText(Input.output.getSubAlimentacaoIsento() + "");
-        this.diuturnidadesNaoIsentasL.setText(Input.output.getDiuturnidadesNaoIsentos() + "");
-        this.subAlimNaoIsentoL.setText(Input.output.getSubAlimentacaoNaoIsento() + "");
-        this.retencaoIRSL.setText(Input.output.getRetencaoIRS() + "");
-        this.segSocialL.setText(Input.output.getSegSocial() + "");
-        this.totalIliquidoL.setText(Input.output.getTotalIliquido() + "");
-        this.outrosNaoIsentosL.setText(Input.output.getOutrosNaoIsentos() + "");
-        this.segSocialEEEL.setText(Input.output.getSegSocialEEE() + "");
-        this.totalLiquidoL.setText(Input.output.getTotalLiquido() + "");
+        this.outrosIsentosL.setText(Input.output.getOutrosIsentos() / 100.0 + "");
+        this.abonoFalhasIsentoL.setText(Input.output.getAbonoFalhasIsento() / 100.0 + "");
+        this.subsidioAlimIsentoL.setText(Input.output.getSubAlimentacaoIsento() / 100.0 + "");
+        this.diuturnidadesNaoIsentasL.setText(Input.output.getDiuturnidadesNaoIsentos() / 100.0 + "");
+        this.subAlimNaoIsentoL.setText(Input.output.getSubAlimentacaoNaoIsento() / 100.0 + "");
+        this.retencaoIRSL.setText(Input.output.getRetencaoIRS() / 100.0 + "");
+        this.segSocialL.setText(Input.output.getSegSocial() / 100.0 + "");
+        this.totalIliquidoL.setText(Input.output.getTotalIliquido() / 100.0 + "");
+        this.outrosNaoIsentosL.setText(Input.output.getOutrosNaoIsentos() / 100.0 + "");
+        this.segSocialEEEL.setText(Input.output.getSegSocialEEE() / 100.0 + "");
+        this.totalLiquidoL.setText(Input.output.getTotalLiquido() / 100.0 + "");
     }
 
-    public void goback() throws IOException {
-        Salarios.redirectTo("View/InputWindow.fxml");
+    public void goback() {
+        Salarios.redirectTo(SceneLoader.View.InputWindow);
     }
 
     public void exitAll(){

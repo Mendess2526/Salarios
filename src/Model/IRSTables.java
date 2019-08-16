@@ -1,13 +1,16 @@
 package Model;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class IRSTables {
     private static IRSTables instance = null;
 
-    public static IRSTables getInstance() {
+    static IRSTables getInstance() {
         if (instance == null) {
             try {
                 instance = new IRSTables();
@@ -96,7 +99,7 @@ public class IRSTables {
         return percent * salarioBruto;
     }
 
-    public double deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
+    double deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
         switch (estado) {
             case Single:
                 return deducaoAux(unmarried, salarioBruto, dependentes);

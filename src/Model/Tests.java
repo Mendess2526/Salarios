@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.MissingFormatArgumentException;
-
 public class Tests {
 
     public static void main(String[] args) {
