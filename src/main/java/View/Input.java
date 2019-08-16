@@ -86,7 +86,7 @@ public class Input implements Initializable {
             if (n < 0) {
                 throw new InvalidParameterException();
             }
-            return (n > 6) ? Optional.of(6) : Optional.of(n);
+            return (n > 5) ? Optional.of(6) : Optional.of(n);
         } catch (NumberFormatException e) {
             this.numDependentesError.setText("Invalid number");
         } catch (InvalidParameterException e) {
@@ -183,37 +183,41 @@ public class Input implements Initializable {
     }
 
     public void calculate() {
-        clearLables();
-        Optional<Integer> salarioBruto = getSalarioBruto();
-        Optional<Integer> numDependentes = getNumDependentes();
-        Optional<Integer> numDias = getNumDias();
-        Optional<Integer> outrosIsentos = getOutrosIsentos();
-        Optional<Integer> abonoFalhas = getAbonoParaFalhas();
-        Optional<Integer> diuturnidadesNaoIsentas = getDiuturnidadesNaoIsentas();
-        Optional<Integer> subsidioAlim = getSubsidioAlim();
-        Optional<Integer> outrosNaoIsentos = getOutrosNaoIsentos();
-        Optional<IRSTables.IRSTableType> irsTableType = getTabelaIRS();
-        Optional<Constants.EncargosEEmpregadoraSS> encargosEEmpregadoraSS = getEncargosEE();
-        boolean emNumerario = !this.emNumerario.isSelected();
         try {
-            //noinspection OptionalGetWithoutIsPresent
-            InputData id = new InputData(
-                    salarioBruto.get(),
-                    numDependentes.get(),
-                    numDias.get(),
-                    outrosIsentos.get(),
-                    irsTableType.get(),
-                    abonoFalhas.get(),
-                    diuturnidadesNaoIsentas.get(),
-                    emNumerario,
-                    subsidioAlim.get(),
-                    outrosNaoIsentos.get(),
-                    encargosEEmpregadoraSS.get());
-            output = id.solve();
             clearLables();
-            Salarios.redirectTo(SceneLoader.View.OutputWindow);
-            OutputChangeEvents.fireEvents();
-        } catch (NoSuchElementException ignored) {
+            Optional<Integer> salarioBruto = getSalarioBruto();
+            Optional<Integer> numDependentes = getNumDependentes();
+            Optional<Integer> numDias = getNumDias();
+            Optional<Integer> outrosIsentos = getOutrosIsentos();
+            Optional<Integer> abonoFalhas = getAbonoParaFalhas();
+            Optional<Integer> diuturnidadesNaoIsentas = getDiuturnidadesNaoIsentas();
+            Optional<Integer> subsidioAlim = getSubsidioAlim();
+            Optional<Integer> outrosNaoIsentos = getOutrosNaoIsentos();
+            Optional<IRSTables.IRSTableType> irsTableType = getTabelaIRS();
+            Optional<Constants.EncargosEEmpregadoraSS> encargosEEmpregadoraSS = getEncargosEE();
+            boolean emNumerario = !this.emNumerario.isSelected();
+            try {
+                //noinspection OptionalGetWithoutIsPresent
+                InputData id = new InputData(
+                        salarioBruto.get(),
+                        numDependentes.get(),
+                        numDias.get(),
+                        outrosIsentos.get(),
+                        irsTableType.get(),
+                        abonoFalhas.get(),
+                        diuturnidadesNaoIsentas.get(),
+                        emNumerario,
+                        subsidioAlim.get(),
+                        outrosNaoIsentos.get(),
+                        encargosEEmpregadoraSS.get());
+                output = id.solve();
+                clearLables();
+                Salarios.redirectTo(SceneLoader.View.OutputWindow);
+                OutputChangeEvents.fireEvents();
+            } catch (NoSuchElementException ignored) {
+            }
+        } catch (Exception e) {
+            Salarios.popUp(e.getMessage());
         }
     }
 
