@@ -1,13 +1,16 @@
 package View;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class Output implements Initializable {
+public class Output {
+    @FXML
+    private Label retencaoIRSTaxL;
     @FXML
     private Label salarioBrutoL;
     @FXML
@@ -36,21 +39,72 @@ public class Output implements Initializable {
     private Label totalLiquidoL;
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.salarioBrutoL.setText(Input.output.getSalarioBruto() / 100.0 + "");
-        this.fctL.setText(Input.output.getFCT() + "");
-        this.outrosIsentosL.setText(Input.output.getOutrosIsentos() / 100.0 + "");
-        this.abonoFalhasIsentoL.setText(Input.output.getAbonoFalhasIsento() / 100.0 + "");
-        this.subsidioAlimIsentoL.setText(Input.output.getSubAlimentacaoIsento() / 100.0 + "");
-        this.diuturnidadesNaoIsentasL.setText(Input.output.getDiuturnidadesNaoIsentos() / 100.0 + "");
-        this.subAlimNaoIsentoL.setText(Input.output.getSubAlimentacaoNaoIsento() / 100.0 + "");
-        this.retencaoIRSL.setText(Input.output.getRetencaoIRS() / 100.0 + "");
-        this.segSocialL.setText(Input.output.getSegSocial() / 100.0 + "");
-        this.totalIliquidoL.setText(Input.output.getTotalIliquido() / 100.0 + "");
-        this.outrosNaoIsentosL.setText(Input.output.getOutrosNaoIsentos() / 100.0 + "");
-        this.segSocialEEEL.setText(Input.output.getSegSocialEEE() / 100.0 + "");
-        this.totalLiquidoL.setText(Input.output.getTotalLiquido() / 100.0 + "");
+    @FXML
+    public void initialize() {
+        OutputChangeEvents.register(() -> {
+            this.salarioBrutoL.setText(String.format("%,.2f€", Input.getOutput().getSalarioBruto() / 100.0));
+            this.fctL.setText(String.format("%,.2f€", Input.getOutput().getFCT() / 100.0));
+            this.outrosIsentosL.setText(String.format("%,.2f€", Input.getOutput().getOutrosIsentos() / 100.0));
+            this.abonoFalhasIsentoL.setText(String.format("%,.2f€", Input.getOutput().getAbonoFalhasIsento() / 100.0));
+            this.subsidioAlimIsentoL.setText(String.format(
+                    "%,.2f€",
+                    Input.getOutput().getSubAlimentacaoIsento() / 100.0));
+            this.diuturnidadesNaoIsentasL.setText(String.format(
+                    "%,.2f€",
+                    Input.getOutput().getDiuturnidadesNaoIsentos()
+                    / 100.0));
+            this.subAlimNaoIsentoL.setText(String.format(
+                    "%,.2f€",
+                    Input.getOutput().getSubAlimentacaoNaoIsento() / 100.0));
+            this.retencaoIRSL.setText(String.format("%,d.00€", Input.getOutput().getRetencaoIRS().getFirst() / 100));
+            this.retencaoIRSTaxL.setText(String.format(
+                    "%.2f%%",
+                    Input.getOutput().getRetencaoIRS().getSecond() * 100.0));
+            this.segSocialL.setText(String.format("%,.2f€", Input.getOutput().getSegSocial() / 100.0));
+            this.totalIliquidoL.setText(String.format("%,.2f€", Input.getOutput().getTotalIliquido() / 100.0));
+            this.outrosNaoIsentosL.setText(String.format("%,.2f€", Input.getOutput().getOutrosNaoIsentos() / 100.0));
+            this.segSocialEEEL.setText(String.format("%,.2f€", Input.getOutput().getSegSocialEEE() / 100.0));
+            this.totalLiquidoL.setText(String.format("%,.2f€", Input.getOutput().getTotalLiquido() / 100.0));
+        });
+    }
+
+    public void save() {
+        String csv = String.format("retencaoIRSTax,%s\n"
+                                   + "salarioBruto,%s\n"
+                                   + "fct,%s\n"
+                                   + "outrosIsentos,%s\n"
+                                   + "abonoFalhasIsento,%s\n"
+                                   + "subsidioAlimIsento,%s\n"
+                                   + "diuturnidadesNaoIsentas,%s\n"
+                                   + "subAlimNaoIsento,%s\n"
+                                   + "retencaoIRS,%s\n"
+                                   + "segSocial,%s\n"
+                                   + "totalIliquido,%s\n"
+                                   + "outrosNaoIsentos,%s\n"
+                                   + "segSocialEEE,%s\n"
+                                   + "totalLiquido,%s",
+                                   retencaoIRSTaxL.getText(),
+                                   salarioBrutoL.getText(),
+                                   fctL.getText(),
+                                   outrosIsentosL.getText(),
+                                   abonoFalhasIsentoL.getText(),
+                                   subsidioAlimIsentoL.getText(),
+                                   diuturnidadesNaoIsentasL.getText(),
+                                   subAlimNaoIsentoL.getText(),
+                                   retencaoIRSL.getText(),
+                                   segSocialL.getText(),
+                                   totalIliquidoL.getText(),
+                                   outrosNaoIsentosL.getText(),
+                                   segSocialEEEL.getText(),
+                                   totalLiquidoL.getText());
+
+        try {
+            PrintWriter out = new PrintWriter("Simulacao" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd-HH:mm")) +".csv");
+            out.print(csv);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void goback() {

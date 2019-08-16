@@ -1,5 +1,7 @@
 package Model;
 
+import util.Pair;
+
 public class OutputData {
     private final int salarioBruto;
     private final int outrosNaoIsentos;
@@ -10,7 +12,7 @@ public class OutputData {
     private final int outrosIsentos;
     private final int totalIliquido;
     private final int segSocial;
-    private final int retencaoIRS;
+    private final Pair<Integer, Double> retencaoIRS;
     private final int totalLiquido;
     private final int segSocialEEE;
     private final int FCT;
@@ -25,7 +27,7 @@ public class OutputData {
             int outrosIsentos,
             int totalIliquido,
             int segSocial,
-            int retencaoIRS,
+            Pair<Integer, Double> retencaoIRS,
             int totalLiquido,
             int segSocialEEE,
             int FCT
@@ -77,7 +79,7 @@ public class OutputData {
         return segSocial;
     }
 
-    public int getRetencaoIRS() {
+    public Pair<Integer, Double> getRetencaoIRS() {
         return retencaoIRS;
     }
 

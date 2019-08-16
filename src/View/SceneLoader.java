@@ -34,12 +34,6 @@ class SceneLoader {
         return scenes.get(name);
     }
 
-    static Scene getReloaded(View view) {
-        initIfNeeded();
-        scenes.remove(view.getName());
-        return get(view);
-    }
-
     enum View {
         InputWindow("View/InputWindow.fxml"),
         OutputWindow("View/OutputWindow.fxml"),

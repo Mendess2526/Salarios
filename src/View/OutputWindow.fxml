@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
 <!--suppress JavaFxDefaultTag -->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Output">
     <children>
         <Label layoutX="210.0" layoutY="25.0" text="Salário Bruto:" textAlignment="RIGHT" />
         <Label layoutX="61.0" layoutY="50.0" text="Subsídio de Alimentação não Isento:" textAlignment="RIGHT" />
         <Label layoutX="123.0" layoutY="75.0" text="Diuturnidades não Isentas:" textAlignment="RIGHT" />
-        <Label layoutX="88.0" layoutY="100.0" text="Subsídio de Alimentação Isento:" textAlignment="RIGHT" />
-        <Label layoutX="149.0" layoutY="125.0" text="Abono p/Falhas Isento:" textAlignment="RIGHT" />
-        <Label layoutX="199.0" layoutY="150.0" text="Outros Isentos:" textAlignment="RIGHT" />
-        <Label layoutX="210.0" layoutY="175.0" text="Total Ilíquido:" textAlignment="RIGHT" />
-        <Label layoutX="183.0" layoutY="200.0" text="Segurança Social:" textAlignment="RIGHT" />
-        <Label layoutX="199.0" layoutY="225.0" text="Rentenção IRS:" textAlignment="RIGHT" />
-        <Label layoutX="210.0" layoutY="250.0" text="Total Líquido:" textAlignment="RIGHT" />
-        <Label layoutX="153.0" layoutY="275.0" text="Segurança Social EEE:" textAlignment="RIGHT" />
-        <Label layoutX="268.0" layoutY="300.0" text="FCT:" textAlignment="RIGHT" />
-        <Label layoutX="170.0" layoutY="325.0" text="Outros não Isentos:" textAlignment="RIGHT" />
+        <Label layoutX="88.0" layoutY="125.0" text="Subsídio de Alimentação Isento:" textAlignment="RIGHT" />
+        <Label layoutX="149.0" layoutY="150.0" text="Abono p/Falhas Isento:" textAlignment="RIGHT" />
+        <Label layoutX="199.0" layoutY="175.0" text="Outros Isentos:" textAlignment="RIGHT" />
+        <Label layoutX="210.0" layoutY="200.0" text="Total Ilíquido:" textAlignment="RIGHT" />
+        <Label layoutX="183.0" layoutY="225.0" text="Segurança Social:" textAlignment="RIGHT" />
+        <Label layoutX="199.0" layoutY="250.0" text="Rentenção IRS:" textAlignment="RIGHT" />
+        <Label layoutX="210.0" layoutY="275.0" text="Total Líquido:" textAlignment="RIGHT" />
+        <Label layoutX="153.0" layoutY="300.0" text="Segurança Social EEE:" textAlignment="RIGHT" />
+        <Label layoutX="268.0" layoutY="325.0" text="FCT:" textAlignment="RIGHT" />
+        <Label layoutX="170.0" layoutY="100.0" text="Outros não Isentos:" textAlignment="RIGHT" />
         <Button layoutX="63.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#goback" text="Back" />
 
-        <Label fx:id="salarioBrutoL" layoutX="301.0" layoutY="25.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="subAlimNaoIsentoL" layoutX="301.0" layoutY="50.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="diuturnidadesNaoIsentasL" layoutX="301.0" layoutY="75.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="subsidioAlimIsentoL" layoutX="301.0" layoutY="100.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="abonoFalhasIsentoL" layoutX="301.0" layoutY="125.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="outrosIsentosL" layoutX="301.0" layoutY="150.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="totalIliquidoL" layoutX="301.0" layoutY="175.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="segSocialL" layoutX="301.0" layoutY="200.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="retencaoIRSL" layoutX="301.0" layoutY="225.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="totalLiquidoL" layoutX="301.0" layoutY="250.0" prefHeight="16.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="segSocialEEEL" layoutX="301.0" layoutY="275.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="fctL" layoutX="301.0" layoutY="300.0" prefWidth="238.0" text="Label" />
-        <Label fx:id="outrosNaoIsentosL" layoutX="301.0" layoutY="325.0" prefWidth="238.0" text="Label" />
+        <Label fx:id="salarioBrutoL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="25.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="subAlimNaoIsentoL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="50.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="diuturnidadesNaoIsentasL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="75.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="subsidioAlimIsentoL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="125.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="abonoFalhasIsentoL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="150.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="outrosIsentosL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="175.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="totalIliquidoL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="200.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="segSocialL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="225.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="retencaoIRSL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="250.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="totalLiquidoL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="275.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="segSocialEEEL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="300.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="fctL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="325.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
+        <Label fx:id="outrosNaoIsentosL" alignment="CENTER_RIGHT" layoutX="295.0" layoutY="100.0" prefHeight="16.0" prefWidth="89.0" text="Label" />
         <Button layoutX="470.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#exitAll" text="Exit" />
+        <Button layoutX="266.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
+      <Label fx:id="retencaoIRSTaxL" alignment="CENTER_RIGHT" layoutX="384.0" layoutY="250.0" prefHeight="16.0" prefWidth="73.0" text="Label" />
     </children>
 </AnchorPane>

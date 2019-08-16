@@ -1,5 +1,9 @@
 package Model;
 
+import util.Pair;
+
+import java.util.Dictionary;
+
 public class InputData {
     private final int salarioBruto;
     private final int numDependentes;
@@ -73,9 +77,10 @@ public class InputData {
         return (int) Math.round(totalNaoIsento * Constants.SocialSecurityTaxWorker);
     }
 
-    private int retencaoIRS(int totalNaoIsento) {
-        return (int) Math.round(IRSTables.getInstance()
-                                         .deducaoSalario(this.maritalStatus, totalNaoIsento, this.numDependentes));
+    private Pair<Integer, Double> retencaoIRS(int totalNaoIsento) {
+        Pair<Double, Double> values = IRSTables.getInstance()
+                                               .deducaoSalario(this.maritalStatus, totalNaoIsento, this.numDependentes);
+        return values.mapFirst(a -> (int) Math.round(a));
     }
 
     private int totalLiquido(int totalIliquido, int segSocial, int retencaoIRS) {
@@ -100,7 +105,7 @@ public class InputData {
 
         int totalIliquido = totalIliquido(totalNaoIsento, subAlimentacaoIsento, abonoFalhasIsento);
         int segSocial = segSocial(totalNaoIsento);
-        int retencaoIRS = retencaoIRS(totalNaoIsento);
+        Pair<Integer, Double> retencaoIRS = retencaoIRS(totalNaoIsento);
 
         return new OutputData(
                 this.salarioBruto,
@@ -113,7 +118,7 @@ public class InputData {
                 totalIliquido,
                 segSocial,
                 retencaoIRS,
-                totalLiquido(totalIliquido, segSocial, retencaoIRS),
+                totalLiquido(totalIliquido, segSocial, retencaoIRS.getFirst()),
                 segSocialEE(totalNaoIsento),
                 FCT());
     }

@@ -3,6 +3,7 @@ package View;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+@SuppressWarnings("SameParameterValue")
 public class Salarios extends Application {
 
     private static Stage primaryStage;
@@ -13,10 +14,6 @@ public class Salarios extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public static void redirectToReloaded(SceneLoader.View view) {
-        primaryStage.setScene(SceneLoader.getReloaded(view));
     }
 
     @Override

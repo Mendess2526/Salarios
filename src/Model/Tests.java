@@ -43,7 +43,7 @@ public class Tests {
         if (o.getSegSocial() != 12610) {
             System.out.println("Seg Social mal: " + o.getSegSocial());
         }
-        if (o.getRetencaoIRS() != 10661) {
+        if (o.getRetencaoIRS().getFirst() != 10661) {
             System.out.println("Retencao IRS mal: " + o.getRetencaoIRS());
         }
         if (o.getTotalLiquido() != 165855) {

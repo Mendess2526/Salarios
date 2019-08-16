@@ -22,7 +22,10 @@ import java.util.ResourceBundle;
 import static java.lang.Double.parseDouble;
 
 public class Input implements Initializable {
-    public static OutputData output;
+    private static OutputData output;
+    public static OutputData getOutput() {
+        return output;
+    }
 
     @FXML
     public Label salarioBrutoError;
@@ -174,7 +177,9 @@ public class Input implements Initializable {
                                   abonoParaFalhasError,
                                   diuturnidadesNaoIsentasError,
                                   subsidioAlimError,
-                                  outrosNaoIsentosError}).forEach(x -> x.setText(""));
+                                  outrosNaoIsentosError,
+                                  tabelaIRSError,
+                                  encargosEEError}).forEach(x -> x.setText(""));
     }
 
     public void calculate() {
@@ -189,31 +194,33 @@ public class Input implements Initializable {
         Optional<Integer> outrosNaoIsentos = getOutrosNaoIsentos();
         Optional<IRSTables.IRSTableType> irsTableType = getTabelaIRS();
         Optional<Constants.EncargosEEmpregadoraSS> encargosEEmpregadoraSS = getEncargosEE();
-        boolean emNumerario = this.emNumerario.isSelected();
+        boolean emNumerario = !this.emNumerario.isSelected();
         try {
+            //noinspection OptionalGetWithoutIsPresent
             InputData id = new InputData(
-                    salarioBruto.orElseThrow(),
-                    numDependentes.orElseThrow(),
-                    numDias.orElseThrow(),
-                    outrosIsentos.orElseThrow(),
-                    irsTableType.orElseThrow(),
-                    abonoFalhas.orElseThrow(),
-                    diuturnidadesNaoIsentas.orElseThrow(),
+                    salarioBruto.get(),
+                    numDependentes.get(),
+                    numDias.get(),
+                    outrosIsentos.get(),
+                    irsTableType.get(),
+                    abonoFalhas.get(),
+                    diuturnidadesNaoIsentas.get(),
                     emNumerario,
-                    subsidioAlim.orElseThrow(),
-                    outrosNaoIsentos.orElseThrow(),
-                    encargosEEmpregadoraSS.orElseThrow());
+                    subsidioAlim.get(),
+                    outrosNaoIsentos.get(),
+                    encargosEEmpregadoraSS.get());
             output = id.solve();
             clearLables();
-            Salarios.redirectToReloaded(SceneLoader.View.OutputWindow);
+            Salarios.redirectTo(SceneLoader.View.OutputWindow);
+            OutputChangeEvents.fireEvents();
         } catch (NoSuchElementException ignored) {
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabelaIRS.setItems(FXCollections.observableList(Arrays.asList(IRSTables.IRSTableType.values())));
-        encargosEE.setItems(FXCollections.observableList(Arrays.asList(Constants.EncargosEEmpregadoraSS.values())));
+        this.tabelaIRS.setItems(FXCollections.observableList(Arrays.asList(IRSTables.IRSTableType.values())));
+        this.encargosEE.setItems(FXCollections.observableList(Arrays.asList(Constants.EncargosEEmpregadoraSS.values())));
     }
 
     public void exitAll() {

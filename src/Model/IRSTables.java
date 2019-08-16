@@ -1,10 +1,9 @@
 package Model;
 
+import util.Pair;
+
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class IRSTables {
@@ -63,12 +62,21 @@ public class IRSTables {
         }
     }
 
-    private double deducaoAux(TreeMap<Integer, ArrayList<Double>> table, int salarioBruto, int dependentes) {
-        double percent = table.ceilingEntry(salarioBruto).getValue().get(dependentes);
-        return percent * salarioBruto;
+    private Pair<Double, Double> deducaoAux(
+            TreeMap<Integer, ArrayList<Double>> table, int salarioBruto, int dependentes)
+    {
+        Double percent = Optional.ofNullable(table.ceilingEntry(salarioBruto))
+                                 .map(Map.Entry::getValue)
+                                 .orElseGet(() -> table.keySet()
+                                                       .stream()
+                                                       .max(Integer::compare)
+                                                       .map(table::get)
+                                                       .get())
+                                 .get(dependentes);
+        return new Pair<>(percent * salarioBruto, percent);
     }
 
-    double deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
+    Pair<Double, Double> deducaoSalario(IRSTableType estado, int salarioBruto, int dependentes) {
         switch (estado) {
             case Single:
                 return deducaoAux(unmarried, salarioBruto, dependentes);
