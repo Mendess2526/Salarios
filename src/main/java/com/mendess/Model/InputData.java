@@ -1,8 +1,6 @@
-package Model;
+package com.mendess.Model;
 
-import util.Pair;
-
-import java.util.Dictionary;
+import com.mendess.util.Pair;
 
 public class InputData {
     private final int salarioBruto;

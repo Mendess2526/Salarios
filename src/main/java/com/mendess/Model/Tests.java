@@ -1,4 +1,4 @@
-package Model;
+package com.mendess.Model;
 
 public class Tests {
 

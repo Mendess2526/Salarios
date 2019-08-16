@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Output">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mendess.View.Output">
     <children>
         <Label layoutX="210.0" layoutY="25.0" text="Salário Bruto:" textAlignment="RIGHT" />
         <Label layoutX="61.0" layoutY="50.0" text="Subsídio de Alimentação não Isento:" textAlignment="RIGHT" />

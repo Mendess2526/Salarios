@@ -1,6 +1,6 @@
-package Model;
+package com.mendess.Model;
 
-import util.Pair;
+import com.mendess.util.Pair;
 
 public class OutputData {
     private final int salarioBruto;

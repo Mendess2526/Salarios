@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="542.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Input">
+<AnchorPane prefHeight="542.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mendess.View.Input">
    <children>
       <Label layoutX="323.0" layoutY="99.0" prefHeight="16.0" prefWidth="176.0" text="Tabela IRS:" />
       <TextField fx:id="salarioBruto" layoutX="86.0" layoutY="50.0" prefHeight="27.0" prefWidth="176.0" />

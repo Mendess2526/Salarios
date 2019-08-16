@@ -1,4 +1,4 @@
-package View;
+package com.mendess.View;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,8 +35,8 @@ class SceneLoader {
     }
 
     enum View {
-        InputWindow("View/InputWindow.fxml"),
-        OutputWindow("View/OutputWindow.fxml"),
+        InputWindow("com/mendess/InputWindow.fxml"),
+        OutputWindow("com/mendess/OutputWindow.fxml"),
         ;
         private final String name;
 

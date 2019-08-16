@@ -1,4 +1,4 @@
-package Model;
+package com.mendess.Model;
 
 public class Constants {
     static final double SocialSecurityTaxWorker = 0.11;

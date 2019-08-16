@@ -1,4 +1,4 @@
-package util;
+package com.mendess.util;
 
 import java.util.function.Function;
 

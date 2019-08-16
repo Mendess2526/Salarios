@@ -33,3 +33,4 @@ build.xml
 .~lock*
 out/
 .DS_Store
+target/
