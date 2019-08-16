@@ -1,11 +1,11 @@
 package Model;
 
 public class Constants {
-    public static final double SocialSecurityTaxWorker = 0.11;
-    public static final double FCT = 0.01;
+    static final double SocialSecurityTaxWorker = 0.11;
+    static final double FCT = 0.01;
 
-    public static int isencaoMetodoRenumeracao(boolean emCartao) {
-        if(emCartao) {
+    static int isencaoMetodoRenumeracao(boolean emCartao) {
+        if (emCartao) {
             return 477;
         } else {
             return 763;
@@ -19,10 +19,12 @@ public class Constants {
 
         private final double taxa;
 
-        public double getTaxa() { return this.taxa; }
-
         EncargosEEmpregadoraSS(double taxa) {
             this.taxa = taxa;
+        }
+
+        public double getTaxa() {
+            return this.taxa;
         }
     }
 }

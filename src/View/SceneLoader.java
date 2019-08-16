@@ -9,21 +9,6 @@ import java.util.Objects;
 
 
 class SceneLoader {
-    enum View {
-        InputWindow("View/InputWindow.fxml"),
-        OutputWindow("View/OutputWindow.fxml"),
-        ;
-        private final String name;
-
-        View(String name) {
-            this.name = name;
-        }
-
-        private String getName() {
-            return this.name;
-        }
-    }
-
     private static Map<String, Scene> scenes;
 
     private static void initIfNeeded() {
@@ -40,12 +25,33 @@ class SceneLoader {
                 scenes.put(
                         name,
                         new Scene(FXMLLoader.load(Objects.requireNonNull(Salarios.class.getClassLoader()
-                                                                                                .getResource(name)))));
+                                                                                       .getResource(name)))));
             } catch (Exception e) {
                 e.printStackTrace();
                 System.exit(1);
             }
         }
         return scenes.get(name);
+    }
+
+    static Scene getReloaded(View view) {
+        initIfNeeded();
+        scenes.remove(view.getName());
+        return get(view);
+    }
+
+    enum View {
+        InputWindow("View/InputWindow.fxml"),
+        OutputWindow("View/OutputWindow.fxml"),
+        ;
+        private final String name;
+
+        View(String name) {
+            this.name = name;
+        }
+
+        private String getName() {
+            return this.name;
+        }
     }
 }

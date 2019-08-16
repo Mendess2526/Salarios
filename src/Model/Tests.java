@@ -14,8 +14,7 @@ public class Tests {
                 true,
                 583,
                 12300,
-                Constants.EncargosEEmpregadoraSS.RegineGeral
-        );
+                Constants.EncargosEEmpregadoraSS.RegineGeral);
         OutputData o = in.solve();
         if (o.getSalarioBruto() != 100000) {
             System.out.println("Salario mal: " + o.getSalarioBruto());
@@ -47,7 +46,7 @@ public class Tests {
         if (o.getRetencaoIRS() != 10661) {
             System.out.println("Retencao IRS mal: " + o.getRetencaoIRS());
         }
-        if (o.getTotalLiquido() != 165856) {
+        if (o.getTotalLiquido() != 165855) {
             System.out.println("Liquido mal: " + o.getTotalLiquido());
         }
         if (o.getSegSocialEEE() != 27225) {

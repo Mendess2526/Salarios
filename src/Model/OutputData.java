@@ -1,23 +1,35 @@
 package Model;
 
 public class OutputData {
-    private int salarioBruto;
-    private int outrosNaoIsentos;
-    private int subAlimentacaoNaoIsento;
-    private int diuturnidadesNaoIsentos;
-    private int subAlimentacaoIsento;
-    private int abonoFalhasIsento;
-    private int outrosIsentos;
-    private int totalIliquido;
-    private int segSocial;
-    private int retencaoIRS;
-    private int totalLiquido;
-    private int segSocialEEE;
-    private int FCT;
+    private final int salarioBruto;
+    private final int outrosNaoIsentos;
+    private final int subAlimentacaoNaoIsento;
+    private final int diuturnidadesNaoIsentos;
+    private final int subAlimentacaoIsento;
+    private final int abonoFalhasIsento;
+    private final int outrosIsentos;
+    private final int totalIliquido;
+    private final int segSocial;
+    private final int retencaoIRS;
+    private final int totalLiquido;
+    private final int segSocialEEE;
+    private final int FCT;
 
-    public OutputData(int salarioBruto, int outrosNaoIsentos, int subAlimentacaoNaoIsento, int diuturnidadesNaoIsentos, int subAlimentacaoIsento,
-                      int abonoFalhasIsento, int outrosIsentos, int totalIliquido, int segSocial, int retencaoIRS,
-                      int totalLiquido, int segSocialEEE, int FCT){
+    public OutputData(
+            int salarioBruto,
+            int outrosNaoIsentos,
+            int subAlimentacaoNaoIsento,
+            int diuturnidadesNaoIsentos,
+            int subAlimentacaoIsento,
+            int abonoFalhasIsento,
+            int outrosIsentos,
+            int totalIliquido,
+            int segSocial,
+            int retencaoIRS,
+            int totalLiquido,
+            int segSocialEEE,
+            int FCT
+                     ) {
         this.salarioBruto = salarioBruto;
         this.outrosNaoIsentos = outrosNaoIsentos;
         this.subAlimentacaoNaoIsento = subAlimentacaoNaoIsento;
@@ -87,20 +99,33 @@ public class OutputData {
 
     @Override
     public String toString() {
-        return "OutputData{" +
-                "salarioBruto=" + salarioBruto +
-                ", outrosNaoIsentos=" + outrosNaoIsentos +
-                ", subAlimentacaoNaoIsento=" + subAlimentacaoNaoIsento +
-                ", diuturnidadesNaoIsentos=" + diuturnidadesNaoIsentos +
-                ", subAlimentacaoIsento=" + subAlimentacaoIsento +
-                ", abonoFalhasIsento=" + abonoFalhasIsento +
-                ", outrosIsentos=" + outrosIsentos +
-                ", totalIliquido=" + totalIliquido +
-                ", segSocial=" + segSocial +
-                ", retencaoIRS=" + retencaoIRS +
-                ", totalLiquido=" + totalLiquido +
-                ", segSocialEEE=" + segSocialEEE +
-                ", FCT=" + FCT +
-                '}';
+        return "OutputData{"
+               + "salarioBruto="
+               + salarioBruto
+               + ", outrosNaoIsentos="
+               + outrosNaoIsentos
+               + ", subAlimentacaoNaoIsento="
+               + subAlimentacaoNaoIsento
+               + ", diuturnidadesNaoIsentos="
+               + diuturnidadesNaoIsentos
+               + ", subAlimentacaoIsento="
+               + subAlimentacaoIsento
+               + ", abonoFalhasIsento="
+               + abonoFalhasIsento
+               + ", outrosIsentos="
+               + outrosIsentos
+               + ", totalIliquido="
+               + totalIliquido
+               + ", segSocial="
+               + segSocial
+               + ", retencaoIRS="
+               + retencaoIRS
+               + ", totalLiquido="
+               + totalLiquido
+               + ", segSocialEEE="
+               + segSocialEEE
+               + ", FCT="
+               + FCT
+               + '}';
     }
 }

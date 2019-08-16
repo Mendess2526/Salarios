@@ -8,19 +8,32 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Output implements Initializable {
-    @FXML private Label salarioBrutoL;
-    @FXML private Label fctL;
-    @FXML private Label outrosIsentosL;
-    @FXML private Label abonoFalhasIsentoL;
-    @FXML private Label subsidioAlimIsentoL;
-    @FXML private Label diuturnidadesNaoIsentasL;
-    @FXML private Label subAlimNaoIsentoL;
-    @FXML private Label retencaoIRSL;
-    @FXML private Label segSocialL;
-    @FXML private Label totalIliquidoL;
-    @FXML private Label outrosNaoIsentosL;
-    @FXML private Label segSocialEEEL;
-    @FXML private Label totalLiquidoL;
+    @FXML
+    private Label salarioBrutoL;
+    @FXML
+    private Label fctL;
+    @FXML
+    private Label outrosIsentosL;
+    @FXML
+    private Label abonoFalhasIsentoL;
+    @FXML
+    private Label subsidioAlimIsentoL;
+    @FXML
+    private Label diuturnidadesNaoIsentasL;
+    @FXML
+    private Label subAlimNaoIsentoL;
+    @FXML
+    private Label retencaoIRSL;
+    @FXML
+    private Label segSocialL;
+    @FXML
+    private Label totalIliquidoL;
+    @FXML
+    private Label outrosNaoIsentosL;
+    @FXML
+    private Label segSocialEEEL;
+    @FXML
+    private Label totalLiquidoL;
 
 
     @Override
@@ -44,7 +57,7 @@ public class Output implements Initializable {
         Salarios.redirectTo(SceneLoader.View.InputWindow);
     }
 
-    public void exitAll(){
+    public void exitAll() {
         System.exit(0);
     }
 }

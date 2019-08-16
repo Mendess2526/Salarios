@@ -191,20 +191,21 @@ public class Input implements Initializable {
         Optional<Constants.EncargosEEmpregadoraSS> encargosEEmpregadoraSS = getEncargosEE();
         boolean emNumerario = this.emNumerario.isSelected();
         try {
-            InputData id = new InputData(salarioBruto.orElseThrow(),
-                                         numDependentes.orElseThrow(),
-                                         numDias.orElseThrow(),
-                                         outrosIsentos.orElseThrow(),
-                                         irsTableType.orElseThrow(),
-                                         abonoFalhas.orElseThrow(),
-                                         diuturnidadesNaoIsentas.orElseThrow(),
-                                         emNumerario,
-                                         subsidioAlim.orElseThrow(),
-                                         outrosNaoIsentos.orElseThrow(),
-                                         encargosEEmpregadoraSS.orElseThrow());
+            InputData id = new InputData(
+                    salarioBruto.orElseThrow(),
+                    numDependentes.orElseThrow(),
+                    numDias.orElseThrow(),
+                    outrosIsentos.orElseThrow(),
+                    irsTableType.orElseThrow(),
+                    abonoFalhas.orElseThrow(),
+                    diuturnidadesNaoIsentas.orElseThrow(),
+                    emNumerario,
+                    subsidioAlim.orElseThrow(),
+                    outrosNaoIsentos.orElseThrow(),
+                    encargosEEmpregadoraSS.orElseThrow());
             output = id.solve();
             clearLables();
-            Salarios.redirectTo(SceneLoader.View.OutputWindow);
+            Salarios.redirectToReloaded(SceneLoader.View.OutputWindow);
         } catch (NoSuchElementException ignored) {
         }
     }

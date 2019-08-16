@@ -1,17 +1,17 @@
 package Model;
 
 public class InputData {
-    private int salarioBruto;
-    private int numDependentes;
-    private IRSTables.IRSTableType maritalStatus;
-    private int numDias;
-    private int outrosIsentos;
-    private int abonoParaFalhas;
-    private int diuturnidadesNaoIsentos;
-    private boolean emNumerario;
-    private int subAlimentacaoBase;
-    private int outrosNaoIsento;
-    private Constants.EncargosEEmpregadoraSS encargosEEmpregadoraSS;
+    private final int salarioBruto;
+    private final int numDependentes;
+    private final IRSTables.IRSTableType maritalStatus;
+    private final int numDias;
+    private final int outrosIsentos;
+    private final int abonoParaFalhas;
+    private final int diuturnidadesNaoIsentos;
+    private final boolean emNumerario;
+    private final int subAlimentacaoBase;
+    private final int outrosNaoIsento;
+    private final Constants.EncargosEEmpregadoraSS encargosEEmpregadoraSS;
 
     public InputData(
             int salarioBruto,
@@ -24,7 +24,8 @@ public class InputData {
             boolean emNumerario,
             int subAlimentacaoBase,
             int outrosNaoIsentos,
-            Constants.EncargosEEmpregadoraSS encargosEEmpregadoraSS) {
+            Constants.EncargosEEmpregadoraSS encargosEEmpregadoraSS
+                    ) {
         this.salarioBruto = salarioBruto;
         this.numDependentes = numDependentes;
         this.numDias = numDias;
@@ -65,10 +66,7 @@ public class InputData {
     }
 
     private int totalIliquido(int totalNaoIsento, int subAlimentacaoIsento, int abonoParaFalhasIsento) {
-        return totalNaoIsento
-                + subAlimentacaoIsento
-                + abonoParaFalhasIsento
-                + this.outrosIsentos;
+        return totalNaoIsento + subAlimentacaoIsento + abonoParaFalhasIsento + this.outrosIsentos;
     }
 
     private int segSocial(int totalNaoIsento) {
