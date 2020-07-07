@@ -23,6 +23,24 @@
             <artifactId>javafx-fxml</artifactId>
             <version>12.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>12.0.2</version>
+            <classifier>win</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>12.0.2</version>
+            <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>12.0.2</version>
+            <classifier>mac</classifier>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -32,6 +50,14 @@
                 <version>3.8.1</version>
                 <configuration>
                     <release>12</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.3</version>
+                <configuration>
+                    <mainClass>com.mendess.Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -47,25 +73,17 @@
                         <configuration>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>project-classifier</shadedClassifierName>
-                            <outputFile>build\${project.artifactId}-${project.version}.jar</outputFile>
+                            <outputFile>target/shaded/${project.artifactId}-${project.version}.jar</outputFile>
                             <transformers>
                                 <transformer implementation=
                                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.mendess.View.Main</mainClass>
+                                    <mainClass>com.mendess.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.openjfx</groupId>-->
-<!--                <artifactId>javafx-maven-plugin</artifactId>-->
-<!--                <version>0.0.3</version>-->
-<!--                <configuration>-->
-<!--                    <mainClass>com.mendess.View.Salarios</mainClass>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 

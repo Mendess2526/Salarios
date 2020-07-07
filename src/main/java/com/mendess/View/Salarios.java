@@ -2,6 +2,8 @@ package com.mendess.View;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -28,14 +30,8 @@ public class Salarios extends Application {
         Salarios.primaryStage.show();
     }
 
-    public static void popUp(String message) {
-        final Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initOwner(primaryStage);
-        VBox dialogBox = new VBox(20);
-        dialogBox.getChildren().add(new Text(message));
-        Scene dialogScene = new Scene(dialogBox, 300, 200);
-        dialog.setScene(dialogScene);
-        dialog.show();
+    static void popUp(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.showAndWait();
     }
 }

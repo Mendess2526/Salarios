@@ -3,8 +3,7 @@ package com.mendess.View;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -99,10 +98,12 @@ public class Output {
                                    totalLiquidoL.getText());
 
         try {
-            PrintWriter out = new PrintWriter("Simulacao_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd-HH:mm")) +".csv");
-            out.println(csv);
+            String filename = "Simulacao_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd-HH_mm")) +".csv";
+            System.out.println(filename);
+            BufferedWriter out = new BufferedWriter(new FileWriter(filename));
+            out.write(csv);
             out.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             Salarios.popUp(e.getMessage());
         }
     }
